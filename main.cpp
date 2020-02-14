@@ -6,8 +6,12 @@
 
 int main()
 {
-    Sync sync;
-    sync.copy();
+	const boost::filesystem::path path("test_dir/test1.txt");
+	const boost::filesystem::path dest("test_dir/copy.txt");
+
+	boost::filesystem::copy_directory("test_dir/root", "test_dir/dest");
+
+	//Sync::play_sync(path, dest);
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
