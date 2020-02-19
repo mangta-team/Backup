@@ -20,19 +20,19 @@ namespace dir_center
 		bfs::path* ptr_dest;
 
 	public:
-		Dir() { this->Set_Ptr_Source(new bfs::path); this->Set_Ptr_Dest(new bfs::path); }
-		~Dir() { delete this->Get_Ptr_Source(); delete this->Get_Ptr_Dest(); }
+		Dir() { this->set_ptr_source(new bfs::path); this->set_ptr_dest(new bfs::path); }
+		~Dir() { delete this->get_ptr_source(); delete this->get_ptr_dest(); }
 
 		// 클래스 멤버의 set/get
-		void Set_Ptr_Source(bfs::path* ptr_source) { this->ptr_source = ptr_source; }
-		void Set_Ptr_Dest(bfs::path* ptr_dest) { this->ptr_dest = ptr_dest; }
-		bfs::path* Get_Ptr_Source() { return this->ptr_source; }
-		bfs::path* Get_Ptr_Dest() { return this->ptr_dest; }
+		void set_ptr_source(bfs::path* ptr_source) { this->ptr_source = ptr_source; }
+		void set_ptr_dest(bfs::path* ptr_dest) { this->ptr_dest = ptr_dest; }
+		bfs::path* get_ptr_source() { return this->ptr_source; }
+		bfs::path* get_ptr_dest() { return this->ptr_dest; }
 
-		void Set_Source(const bfs::path& source) { *(this->ptr_source) = source; }
-		void Set_Dest(const bfs::path& dest) { *(this->ptr_dest) = dest; }
-		std::string Get_Source() { return this->ptr_source->string(); }
-		std::string Get_Dest() { return this->ptr_dest->string(); }
+		void set_source(const bfs::path& source) { *(this->ptr_source) = source; }
+		void set_dest(const bfs::path& dest) { *(this->ptr_dest) = dest; }
+		std::string get_source() { return this->ptr_source->string(); }
+		std::string get_dest() { return this->ptr_dest->string(); }
 	};
 }
 
