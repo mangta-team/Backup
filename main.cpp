@@ -6,10 +6,11 @@
 
 int main()
 {
-	const boost::filesystem::path path("test_dir/test1.txt");
-	const boost::filesystem::path dest("test_dir/copy.txt");
+	boost::filesystem::path* ptr_source = new boost::filesystem::path;
+	boost::filesystem::path dest("c:/");
 
-	boost::filesystem::copy_directory("test_dir/root", "test_dir/dest");
+	*(ptr_source) = dest;
+	std::cout << ptr_source->string() << std::endl;
 
 	//Sync::play_sync(path, dest);
 }
