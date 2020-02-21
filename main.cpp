@@ -3,16 +3,20 @@
 
 #include <iostream>
 #include "Sync.hpp"
+#include "Dir_Center.hpp"
 
 int main()
 {
-	boost::filesystem::path* ptr_source = new boost::filesystem::path;
-	boost::filesystem::path dest("c:/");
+	bfs::path source("c:/");
+	bfs::path dest("d:/");
 
-	*(ptr_source) = dest;
-	std::cout << ptr_source->string() << std::endl;
+	Dir_ dir_;
 
-	//Sync::play_sync(path, dest);
+	dir_.init();
+	/*dir_.get_ptr_dir()->push_back(new Dir);
+	dir_.get_ptr_dir()->back()->set_source(source);
+	dir_.get_ptr_dir()->back()->set_dest(dest);*/
+	dir_.shutdown();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
