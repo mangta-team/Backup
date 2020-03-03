@@ -2,21 +2,13 @@
 //
 
 #include <iostream>
+#include <string>
 #include "Sync.hpp"
 #include "Dir_Center.hpp"
 
 int main()
 {
-	bfs::path source("c:/");
-	bfs::path dest("d:/");
-
-	Dir_ dir_;
-
-	dir_.init();
-	/*dir_.get_ptr_dir()->push_back(new Dir);
-	dir_.get_ptr_dir()->back()->set_source(source);
-	dir_.get_ptr_dir()->back()->set_dest(dest);*/
-	dir_.shutdown();
+	
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

@@ -4,10 +4,14 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+
 //#include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/exception.hpp>  
+#include <boost/filesystem.hpp>
+namespace bfs = boost::filesystem;
 
 /**
  * @brief 동기화를 담당하는 클래스
@@ -23,10 +27,13 @@ private:
 public:
     /**
      * @brief 동기화 메소드
+     * @details 재귀함수, root와 dest의 각각 파일의 수정한 날짜 비교, 다르면 root의 것으로 백업한다.
      * @param boost::filesystem::path root 원본 경로
      * @param boost::filesystem::path deest 복사본 경로
+     * @commnet 매개변수에 대해 생각하기
+     *          boost::system::error_code의 기본값이 정해진 메소드를 구현할 수 있으면 구현
      */
-    void static play_sync(boost::filesystem::path& root, boost::filesystem::path& dest);
+    void static sync(bfs::path root, bfs::path dest/*, boost::system::error_code*/);
     
     /**
      * @brief 매개변수로 받은 경로에서 최하위 디렉토리 이름을 반환
@@ -35,18 +42,18 @@ public:
      * @param boost::filesystem::path path 추출할 최하위 데렉토리의 경로
      * @return std::string 최하위 디렉토리 이름
      */
-    std::string static get_dir_name(boost::filesystem::path& path);
+    std::string static get_dir_name(bfs::path& path);
 
     void static copy()
     {
-        const boost::filesystem::path path("test_dir/test1.txt");
-        const boost::filesystem::path dest("test_dir/copy.txt");
+        const bfs::path path("test_dir/test1.txt");
+        const bfs::path dest("test_dir/copy.txt");
 
         try
         {
-            boost::filesystem::copy_file(path, dest, boost::filesystem::copy_option::overwrite_if_exists);
+            bfs::copy_file(path, dest, bfs::copy_option::overwrite_if_exists);
         }
-        catch (boost::filesystem::filesystem_error& ex)
+        catch (bfs::filesystem_error& ex)
         {
             std::cout << ex.what() << std::endl;
             throw;
