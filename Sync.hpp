@@ -11,6 +11,7 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/exception.hpp>  
 #include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
 namespace bfs = boost::filesystem;
 
 /**
@@ -30,10 +31,10 @@ public:
      * @details 재귀함수, root와 dest의 각각 파일의 수정한 날짜 비교, 다르면 root의 것으로 백업한다.
      * @param boost::filesystem::path root 원본 경로
      * @param boost::filesystem::path deest 복사본 경로
-     * @commnet 매개변수에 대해 생각하기
-     *          boost::system::error_code의 기본값이 정해진 메소드를 구현할 수 있으면 구현
+     * @commnet boost::system::error_code의 기본값이 정해진 메소드를 구현할 수 있으면 구현
+     *          에러 발생, 재귀함수 호출중 비정상경로로 호출
      */
-    void static sync(bfs::path root, bfs::path dest/*, boost::system::error_code*/);
+    void static sync(const bfs::path &root, const bfs::path &dest/*, boost::system::error_code*/);
     
     /**
      * @brief 매개변수로 받은 경로에서 최하위 디렉토리 이름을 반환
@@ -41,8 +42,11 @@ public:
                 최하위 디렉토리의 이름을 반환한다.
      * @param boost::filesystem::path path 추출할 최하위 데렉토리의 경로
      * @return std::string 최하위 디렉토리 이름
+     * @commnet path.filename() 때문에 없어도 되는 메소드, 삭제필요
      */
     std::string static get_dir_name(bfs::path& path);
+
+    void static get_directories(const bfs::path& path, std::vector<bfs::path>&);
 
     void static copy()
     {
@@ -59,6 +63,8 @@ public:
             throw;
         }
     }
+
+    void static test(const bfs::path& root, const bfs::path& dest);
 };
 	
 #endif // !SYNC_HPP
