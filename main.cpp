@@ -8,7 +8,9 @@
 
 int main()
 {
-	Sync::sync("C:/TEST/A", "D:/TEST/Backup");
+	Dir dir;
+
+	dir.set_root("c:/root");
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
