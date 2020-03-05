@@ -9,21 +9,21 @@ using namespace std;
 void Sync::sync(const bfs::path& root, const bfs::path& dest)
 {
 	// 1. dest/root.filename()이 존재하지 않으면 생성
-	bfs::path tmp_root = root;
-	bfs::path tmp_dest = dest;
+	bfs::path tmp_root = root.generic_path();
+	bfs::path tmp_dest = dest.generic_path();
 	if (!bfs::exists(tmp_dest /= root.filename()))
-		bfs::create_directory(tmp_dest);
+		bfs::create_directory(tmp_dest.generic_path());
 
 	// 2. root 하위 디렉토리, 파일 조사
 	vector<bfs::path> directories;
 	vector<bfs::path> files;
 	BOOST_FOREACH(const bfs::path & path, make_pair(bfs::directory_iterator(root), bfs::directory_iterator()))
 	{
-		if (bfs::is_directory(path))
-			directories.push_back(path);
+		if (bfs::is_directory(path.generic_path()))
+			directories.push_back(path.generic_path());
 
 		else
-			files.push_back(path);
+			files.push_back(path.generic_path());
 	}
 
 	// 3. 하위 폴더에 재귀함수로 sync 호출
@@ -31,8 +31,8 @@ void Sync::sync(const bfs::path& root, const bfs::path& dest)
 	{
 		for (int index = 0; index < directories.size(); index++)
 		{
-			tmp_dest = dest;
-			sync(directories[index], tmp_dest /= root.filename() /= directories[index].filename());
+			tmp_dest = dest; tmp_dest /= root.filename();
+			sync(directories[index], tmp_dest);
 		}
 
 	}
@@ -42,6 +42,7 @@ void Sync::sync(const bfs::path& root, const bfs::path& dest)
 	{
 		for (int index = 0; index < files.size(); index++)
 		{
+			tmp_dest = dest;
 			tmp_dest /= root.filename() /= files[index].filename();
 			bfs::copy_file(files[index], tmp_dest, bfs::copy_option::overwrite_if_exists);
 		}

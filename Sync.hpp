@@ -35,7 +35,7 @@ public:
      *          에러 발생, 재귀함수 호출중 비정상경로로 호출
      */
     void static sync(const bfs::path &root, const bfs::path &dest/*, boost::system::error_code*/);
-    
+   
     /**
      * @brief 매개변수로 받은 경로에서 최하위 디렉토리 이름을 반환
      * @details boost::filesystem::path 으로 받은 경로를 std::string으로 변환하여 
