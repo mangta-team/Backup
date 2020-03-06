@@ -1,4 +1,0 @@
-D:/Code/Sync/Test1-C:\Users\ParkHyunwoo\OneDrive\Sync_Test1
-D:/Code/Sync/Test2-C:\Users\ParkHyunwoo\OneDrive\Sync_Test2
-D:/Code/Sync/Test3-C:\Users\ParkHyunwoo\OneDrive\Sync_Test3
-c:/-d:/

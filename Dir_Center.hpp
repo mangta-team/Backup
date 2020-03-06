@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/path.hpp>
 
@@ -17,19 +18,27 @@ private:
 
 public:
 	/**
-	 * @brief 디렉토리를 추가하는 메소드
+	 * @brief 외부 파일에 저장된 root-dest 경로를 추가하는 메소드
 	 */
-	void add(bfs::path path);
+	void static add(bfs::path root, bfs::path dest);
 
 	/**
-	 * @brief 데렉토리를 삭제하는 메소드
+	 * @brief 외부 파일에 저장된 root-dest 경로를 삭제하는 메소드
 	 */
-	void _delete();
+	void static _delete();
 
 	/**
-	 * @brief 디렉토리를 출력하는 메소드
+	 * @brief 외부 파일에 저장된 root-dest 경로를 출력하는 메소드
+	 * @return 외부 파일에 root-dest 경로의 저장 존재 유무 반환, 없으면 1, 있으면 0
 	 */
-	void print();
+	bool static print();
+
+	/**
+	 * @brief 외부 파일에 저장된 root-dest 경로를  출력하고 vector에 저장하는 메소드
+	 * @param 외부 파일에 저장된 경로를 저장할 vector
+	 * @return 외부 파일에 저장된 경로의 존재 유무 반환, 없으면 1, 있으면 0
+	 */
+	bool static print(std::vector<std::string>*);
 };
 
 
