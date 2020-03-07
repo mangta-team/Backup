@@ -1,9 +1,8 @@
 Sync
 
 명령어 형식
-action -option path
+action root-path dest-path
 * action: 수행할 동작
-* option: root/copy
 * path: 로컬의 경로
 
 action
@@ -12,8 +11,10 @@ action
 * print: option의 path 출력
 * sync: 동기화
 * help: 도움말
-* exit: 종료(강제종료하면 root/copy의 path 설정이 제대로 안될 수 있음)
 
-option
-* root: 원본
-* copy: 카피본
+명령어 예)
+add c:/test d:/backup
+delete
+print
+sync
+help
