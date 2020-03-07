@@ -2,7 +2,7 @@
 
 using namespace std;	
 
-void sync::command::Command::command(const std::string command)
+void sync::command::command(const std::string command)
 {
 	if (!check_command(command))
 	{
@@ -37,7 +37,7 @@ void sync::command::Command::command(const std::string command)
 	}
 }
 
-bool sync::command::Command::check_command(const std::string command)
+bool sync::command::check_command(const std::string command)
 {
 
 	ios::app;

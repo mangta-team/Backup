@@ -11,35 +11,35 @@
 
 namespace bfs = boost::filesystem;
 
-#define PATH_TXT "dir_path/path.txt"
-class Dir_Center
+namespace sync
 {
-private:
+namespace dir_center
+{
+#define PATH_TXT "dir_path/path.txt"
 
-public:
-	/**
+/**
 	 * @brief 외부 파일에 저장된 root-dest 경로를 추가하는 메소드
 	 */
-	void static add(bfs::path root, bfs::path dest);
+	void add(bfs::path root, bfs::path dest);
 
 	/**
 	 * @brief 외부 파일에 저장된 root-dest 경로를 삭제하는 메소드
 	 */
-	void static _delete();
+	void _delete();
 
 	/**
 	 * @brief 외부 파일에 저장된 root-dest 경로를 출력하는 메소드
 	 * @return 외부 파일에 root-dest 경로의 저장 존재 유무 반환, 없으면 1, 있으면 0
 	 */
-	bool static print();
+	bool print();
 
 	/**
 	 * @brief 외부 파일에 저장된 root-dest 경로를  출력하고 vector에 저장하는 메소드
 	 * @param 외부 파일에 저장된 경로를 저장할 vector
 	 * @return 외부 파일에 저장된 경로의 존재 유무 반환, 없으면 1, 있으면 0
 	 */
-	bool static print(std::vector<std::string>*);
-};
-
+	bool print(std::vector<std::string>*);
+}
+}
 
 #endif	//	!DIR_CENTER_HPP

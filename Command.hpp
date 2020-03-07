@@ -21,39 +21,35 @@ namespace command
 		help
 	};
 
-
-	class Command
-	{
-		/**
-		 * @brief
-		 * @param string command 명령어
-		 */
-		void static command(const std::string command);
-
-		/**
-		 * @brief
-		 * @param string command 명령어
-		 */
-		sync::command::Action static get_action(const std::string command);
-
-		/**
-		 * @brief
-		 * @param string command 명령어
-		 */
-		bfs::path static get_root_path(const std::string command);
-
-		/**
-		 * @brief
-		 * @param string command 명령어
-		 */
-		bfs::path static get_dest_path(const std::string command);
-
-		/**
-		 * @brief
-		 * @param string command 명령어
-		 */
-		bool static check_command(const std::string command);
-	};
+/**
+ * @brief
+ * @param string command 명령어
+ */
+ void command(const std::string command);
+ 
+/**
+ * @brief
+ * @param string command 명령어
+ */
+ sync::command::Action get_action(const std::string command);
+ 
+/**
+ * @brief
+ * @param string command 명령어
+ */
+ bfs::path get_root_path(const std::string command);
+ 
+/**
+ * @brief
+ * @param string command 명령어
+ */
+ bfs::path get_dest_path(const std::string command);
+ 
+/**
+ * @brief
+ * @param string command 명령어
+ */
+ bool check_command(const std::string command);
 
 } // !namespace command
 } // !namespace sync
