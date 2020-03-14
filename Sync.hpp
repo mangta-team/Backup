@@ -14,10 +14,11 @@
 #include <boost/foreach.hpp>
 namespace bfs = boost::filesystem;
 
-namespace sync
+namespace tmp // 임시 네임스페이스
 {
 namespace sync
 {
+
 /**
  * @brief 동기화 메소드
  * @details 재귀함수, root와 dest의 각각 파일의 수정한 날짜 비교, 다르면 root의 것으로 백업한다.
@@ -26,9 +27,9 @@ namespace sync
  * @commnet boost::system::error_code의 기본값이 정해진 메소드를 구현할 수 있으면 구현
  *          에러 발생, 재귀함수 호출중 비정상경로로 호출
  */
-void static sync(const bfs::path &root, const bfs::path &dest/*, boost::system::error_code*/);
+void sync(const bfs::path &root, const bfs::path &dest/*, boost::system::error_code*/);
 
 } // !namespace sycn
-} // !namespace sync	
+} // !namespace tmp	
 
 #endif // !SYNC_HPP

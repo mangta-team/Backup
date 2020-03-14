@@ -6,7 +6,7 @@ using namespace std;
 // 2. root의 하위 디렉토리, 파일을 각각 조사
 // 3. 하위 폴더가 있으면 sync(하위폴더, dest/root.filename()) 호출 (하위 폴더 반복)
 // 4. 하위 폴더가 더이상 없으면 파일들 복사
-void sync::sync::sync(const bfs::path& root, const bfs::path& dest)
+void tmp::sync::sync(const bfs::path& root, const bfs::path& dest)
 {
 	// 1. dest/root.filename()이 존재하지 않으면 생성
 	bfs::path tmp_root = root.generic_path();

@@ -11,7 +11,7 @@
 
 namespace bfs = boost::filesystem;
 
-namespace sync
+namespace tmp // 임시 네임스페이스
 {
 namespace dir_center
 {

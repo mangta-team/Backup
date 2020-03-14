@@ -2,14 +2,14 @@
 
 using namespace std;
 
-void sync::dir_center::add(bfs::path root, bfs::path dest)
+void tmp::dir_center::add(bfs::path root, bfs::path dest)
 {
 	bfs::ofstream write(PATH_TXT, ios::app);
 	write << root.generic_string() << "-" << dest.generic_string() << endl;
 	write.close();
 }
 
-void sync::dir_center::_delete()
+void tmp::dir_center::_delete()
 {
 	// 외부 파일에 저장된 경로를 출력, vector 변수에 저장
 	vector<string> paths;
@@ -42,7 +42,7 @@ void sync::dir_center::_delete()
 	write.close();
 }
 
-bool sync::dir_center::print()
+bool tmp::dir_center::print()
 {
 	if (bfs::file_size(PATH_TXT) == 0)
 	{
@@ -64,7 +64,7 @@ bool sync::dir_center::print()
 	return 0;
 }
 
-bool sync::dir_center::print(std::vector<std::string>* paths)
+bool tmp::dir_center::print(std::vector<std::string>* paths)
 {
 	if (bfs::file_size(PATH_TXT) == 0)
 	{

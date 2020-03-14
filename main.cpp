@@ -5,12 +5,13 @@
 #include <string>
 #include "Sync.hpp"
 #include "Dir_Center.hpp"
+#include "Command.hpp"
 
-int main()
+int main(int argc, char* argv[])
 {
-	//Dir_Center::add("C:/", "D:/");
-	Dir_Center::print();
-	//Dir_Center::_delete();
+	int test_argc = 3;
+	char* test_argv[6];
+	tmp::command::command(test_argc, test_argv);
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
