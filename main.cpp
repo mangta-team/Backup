@@ -9,9 +9,22 @@
 
 int main(int argc, char* argv[])
 {
-	int test_argc = 3;
 	char* test_argv[6];
-	tmp::command::command(test_argc, test_argv);
+
+	test_argv[0] = "test";
+	test_argv[1] = "add";
+	test_argv[2] = "-root";
+	test_argv[3] = "c:/";
+	test_argv[4] = "-dest";
+	test_argv[5] = "d:/";
+
+	tmp::command::command(6, test_argv);
+
+	//std::cout << bfs::exists(tmp::command::get_root_path(argc, argv)) << std::endl;
+
+
+	/*if (argc != 1)
+		tmp::command::command(argc, argv);*/
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

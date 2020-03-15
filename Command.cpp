@@ -10,22 +10,22 @@ void tmp::command::command(const std::string command)
 		return;
 	}
 
-	switch (get_action(command))
+	switch (get_work(command))
 	{
-	case tmp::command::action::add :
+	case tmp::command::work::add :
 		tmp::dir_center::add(tmp::command::get_root_path(command ,tmp::command::path_option::command), 
 			tmp::command::get_dest_path(command, tmp::command::path_option::command));
 		break;
 
-	case tmp::command::action::_delete :
+	case tmp::command::work::_delete :
 		tmp::dir_center::_delete();
 		break;
 
-	case tmp::command::action::print :
+	case tmp::command::work::print :
 		tmp::dir_center::print();
 		break;
 
-	case tmp::command::action::sync :
+	case tmp::command::work::sync :
 		cout << "[알림] >> 다음 항목을 동기화 합니다." << endl << endl;
 
 		{
@@ -42,38 +42,36 @@ void tmp::command::command(const std::string command)
 
 		break;
 
-	case tmp::command::action::help :
+	case tmp::command::work::help :
 		// 
 		break;
-
-	default:
-		cout << "[알림] >> 잘못된 명령어 입니다." << endl << endl;
 	}
 }
 
 void tmp::command::command(const int argc,  char* argv[])
 {
-	if (tmp::command::is_right(argc, argv))
+	tmp::system::Error_Code error_code;
+	if (!tmp::command::is_right(argc, argv, error_code))
 	{
-		cout << "[알림] >> 잘못된 명령어 입니다." << endl << endl;
+		cout << "[알림] >> " << error_code.what() << endl << endl;
 		return;
 	}
 
-	switch (tmp::command::get_action(argv))
+	switch (tmp::command::get_work(argv))
 	{
-	case tmp::command::action::add:
+	case tmp::command::work::add:
 		tmp::sync::sync(tmp::command::get_root_path(argc, argv), tmp::command::get_dest_path(argc, argv));
 		break;
 
-	case tmp::command::action::_delete:
+	case tmp::command::work::_delete:
 		tmp::dir_center::_delete();
 		break;
 
-	case tmp::command::action::print:
+	case tmp::command::work::print:
 		tmp::dir_center::print();
 		break;
 
-	case tmp::command::action::sync:
+	case tmp::command::work::sync:
 		cout << "[알림] >> 다음 항목을 동기화 합니다." << endl << endl;
 
 		{
@@ -90,83 +88,80 @@ void tmp::command::command(const int argc,  char* argv[])
 
 		break;
 
-	case tmp::command::action::help:
+	case tmp::command::work::help:
 		// 
 		break;
-
-	default:
-		cout << "[알림] >> 잘못된 명령어 입니다." << endl << endl;
 	}
 }
 
-tmp::command::action tmp::command::get_action(const std::string command)
+tmp::command::work tmp::command::get_work(const std::string command)
 {
-	string action = command.substr(0, command.find(COMMAND_TOKEN));
+	string work = command.substr(0, command.find(COMMAND_TOKEN));
 
-	if (action == "add")
-		return tmp::command::action::add;
+	if (work == "add")
+		return tmp::command::work::add;
 
-	else if (action == "delete")
-		return tmp::command::action::_delete;
+	else if (work == "delete")
+		return tmp::command::work::_delete;
 
-	else if (action == "print")
-		return tmp::command::action::print;
+	else if (work == "print")
+		return tmp::command::work::print;
 
-	else if (action == "sync")
-		return tmp::command::action::sync;
+	else if (work == "sync")
+		return tmp::command::work::sync;
 
-	else if (action == "help")
-		return tmp::command::action::help;
+	else if (work == "help")
+		return tmp::command::work::help;
 
 	else
-		return tmp::command::action::unknown;
+		return tmp::command::work::unknown;
 }
 
-tmp::command::action tmp::command::get_action(const std::string command, std::string* const str_action)
+tmp::command::work tmp::command::get_work(const std::string command, std::string* const str_work)
 {
-	string action = command.substr(0, command.find(COMMAND_TOKEN));
-	*str_action = action;
+	string work = command.substr(0, command.find(COMMAND_TOKEN));
+	*str_work = work;
 
-	if (action == "add")
-		return tmp::command::action::add;	
+	if (work == "add")
+		return tmp::command::work::add;	
 
-	else if (action == "delete")
-		return tmp::command::action::_delete;
+	else if (work == "delete")
+		return tmp::command::work::_delete;
 
-	else if (action == "print")
-		return tmp::command::action::print;
+	else if (work == "print")
+		return tmp::command::work::print;
 
-	else if (action == "sync")
-		return tmp::command::action::sync;
+	else if (work == "sync")
+		return tmp::command::work::sync;
 
-	else if (action == "help")
-		return tmp::command::action::help;
+	else if (work == "help")
+		return tmp::command::work::help;
 
 	else
-		return tmp::command::action::unknown;
+		return tmp::command::work::unknown;
 }
 
-tmp::command::action tmp::command::get_action( char* argv[])
+tmp::command::work tmp::command::get_work( char* argv[])
 {
-	string action = *(argv + 1);
+	string work = *(argv + 1);
 
-	if (action == "add")
-		return tmp::command::action::add;
+	if (work == "add")
+		return tmp::command::work::add;
 
-	else if (action == "delete")
-		return tmp::command::action::_delete;
+	else if (work == "delete")
+		return tmp::command::work::_delete;
 
-	else if (action == "print")
-		return tmp::command::action::print;
+	else if (work == "print")
+		return tmp::command::work::print;
 
-	else if (action == "sync")
-		return tmp::command::action::sync;
+	else if (work == "sync")
+		return tmp::command::work::sync;
 
-	else if (action == "help")
-		return tmp::command::action::help;
+	else if (work == "help")
+		return tmp::command::work::help;
 
 	else
-		return tmp::command::action::unknown;
+		return tmp::command::work::unknown;
 }
 
 bfs::path tmp::command::get_root_path(const std::string command, tmp::command::path_option path_option)
@@ -189,17 +184,15 @@ bfs::path tmp::command::get_root_path(const std::string command, tmp::command::p
 
 bfs::path tmp::command::get_root_path(const int argc,  char* argv[])
 {
-	int index;
-	for (index = 0; index < argc; index++)
-	{
-		if (strcmp(*(argv + index), "-root"))
-		{
-			index++;
-			break;
-		}
-	}
+	int index = 0;
 
-	string str_root(*(argv + index));
+	if (!strcmp(argv[2], "-root"))
+		index = 3;
+
+	else if (!strcmp(argv[4], "-root"))
+		index = 5;
+
+	string str_root(argv[index]);
 	bfs::path root(str_root);
 	return root.generic_string();
 }
@@ -224,43 +217,41 @@ bfs::path tmp::command::get_dest_path(const std::string command, tmp::command::p
 
 bfs::path tmp::command::get_dest_path(const int argc,  char* argv[])
 {
-	int index;
-	for (index = 0; index < argc; index++)
-	{
-		if (strcmp(*(argv + index), "-dest"))
-		{
-			index++;
-			break;
-		}
-	}
+	int index = 0;
 
-	string str_dest(*(argv + index));
+	if (!strcmp(argv[2], "-dest"))
+		index = 3;
+
+	else if (!strcmp(argv[4], "-dest"))
+		index = 5;
+
+	string str_dest(argv[index]);
 	bfs::path dest(str_dest);
 	return dest.generic_string();
 }
 
 bool tmp::command::is_right(const std::string command)
 {
-	string str_action;
+	string str_work;
 
-	// action이 unknown일 때
+	// work이 unknown일 때
 	// 오류 문장이다.
-	if (tmp::command::get_action(command) == tmp::command::action::unknown)
+	if (tmp::command::get_work(command) == tmp::command::work::unknown)
 		return false;
 
 
-	// action이 tmp::command::action::add 이 아닐 때(옵션이 필요하지 않는 action)
-	// 명령어와 action의 길이가 같으면 옳바른 문장,
+	// work이 tmp::command::work::add 이 아닐 때(옵션이 필요하지 않는 work)
+	// 명령어와 work의 길이가 같으면 옳바른 문장,
 	// 아니면 오류 문장이다.
-	else if (tmp::command::get_action(command, &str_action) != tmp::command::action::add)
+	else if (tmp::command::get_work(command, &str_work) != tmp::command::work::add)
 	{		
-		if (str_action.size() == command.size())
+		if (str_work.size() == command.size())
 			return true;
 
 		return false;
 	}
 
-	// tmp::command::action::add 일 때
+	// tmp::command::work::add 일 때
 	else
 	{
 		// "-root"의 위치가 "-dest"의 위치보다 높으면 
@@ -278,49 +269,52 @@ bool tmp::command::is_right(const std::string command)
 	}
 }
 
-bool tmp::command::is_right(const int argc,  char* argv[])
+bool tmp::command::is_right(const int argc,  char* argv[], tmp::system::Error_Code& error_code)
 {
-	// action이 tmp::command::action::unkown 이면 틀린 문장이다.
-	if (tmp::command::get_action(argv) == tmp::command::action::unknown)
+	switch (tmp::command::get_work(argv))
+	{
+	// work이 unknown일 때 오류 문장이다.
+	case  tmp::command::work::unknown:
+		error_code.set_error_code(tmp::system::error_list::nonexistent_work);
 		return false;
 
-	// action이 tmp::command::action::add 이 아닐 때(옵션이 필요하지 않는 action)
-	// main 인자의 개수가 2개 보다 많으면 오류 문장이다.
-	else if (tmp::command::get_action(argv) != tmp::command::action::add)
-	{
+	// work이 print, delete, help (옵션이 없는 work)일 때 
+	case tmp::command::work::print:
+	case tmp::command::work::_delete:
+	case tmp::command::work::help:
+		// 명령어의 길이가 3개 이상이면 오류 문장이다.
 		if (argc > 2)
+		{
+			error_code.set_error_code(tmp::system::error_list::number_of_element);
 			return false;
-	}
+		}
 
-	// action이 tmp::command::action::add 일 때
-	else
-	{
-		if (argc < 6)
-			false;
+		return true;
 
-		if (bfs::exists(tmp::command::get_root_path(argc, argv)) && 
-			bfs::exists(tmp::command::get_dest_path(argc, argv)))
-			return true;	
-		
-		return false;
-	}
-
-	switch (tmp::command::get_action(argv))
-	{
-	case  tmp::command::action::unknown:
-		return false;
-
-	case tmp::command::action::print:
-	case tmp::command::action::_delete:
-	case tmp::command::action::help:
-		if (argc > 2)
+	// work이 add일 때
+	case tmp::command::work::add:
+		// 명령어의 길이가 6개가 아니면 오류 문장이다.
+		if (argc != 6)
+		{
+			error_code.set_error_code(tmp::system::error_list::number_of_element);
 			return false;
+		}
 
-	case tmp::command::action::add:
+		// 옵션 자리에 -root, -dest가 없으면 오류 문장이다.
+		if (!(strcmp(argv[2], "-root") || !strcmp(argv[4], "-root")) == false || (!strcmp(argv[2], "-dest") || !strcmp(argv[4], "-dest")) == false)
+		{
+			error_code.set_error_code(tmp::system::error_list::nonexistent_option);
+			return false;
+		}
 
+		// 경로가 존재하지 않으면 오류 문장이다.
+		if (!bfs::exists(tmp::command::get_root_path(argc, argv)) || !bfs::exists(tmp::command::get_dest_path(argc, argv)))
+		{
+			error_code.set_error_code(tmp::system::error_list::nonexistent_path);
+			return false;
+		}
 
-	default:
-		break;
+		return true;
 	}
 }
 
