@@ -48,19 +48,19 @@ void tmp::command::command(const std::string command)
 	}
 }
 
-void tmp::command::command(const int argc,  char* argv[])
+void tmp::command::command(std::vector<std::string> vector_argv)
 {
 	tmp::system::Error_Code error_code;
-	if (!tmp::command::is_right(argc, argv, error_code))
+	if (!tmp::command::is_right(vector_argv, error_code))
 	{
 		cout << "[알림] >> " << error_code.what() << endl << endl;
 		return;
 	}
 
-	switch (tmp::command::get_work(argv))
+	switch (tmp::command::get_work(vector_argv))
 	{
 	case tmp::command::work::add:
-		tmp::sync::sync(tmp::command::get_root_path(argc, argv), tmp::command::get_dest_path(argc, argv));
+		tmp::dir_center::add(tmp::command::get_root_path(vector_argv), tmp::command::get_dest_path(vector_argv));
 		break;
 
 	case tmp::command::work::_delete:
@@ -141,9 +141,9 @@ tmp::command::work tmp::command::get_work(const std::string command, std::string
 		return tmp::command::work::unknown;
 }
 
-tmp::command::work tmp::command::get_work( char* argv[])
+tmp::command::work tmp::command::get_work(std::vector<std::string> vector_argv)
 {
-	string work = *(argv + 1);
+	string work = vector_argv[1];
 
 	if (work == "add")
 		return tmp::command::work::add;
@@ -182,18 +182,17 @@ bfs::path tmp::command::get_root_path(const std::string command, tmp::command::p
 	return root.generic_string();
 }
 
-bfs::path tmp::command::get_root_path(const int argc,  char* argv[])
+bfs::path tmp::command::get_root_path(std::vector<std::string> vector_argv)
 {
 	int index = 0;
 
-	if (!strcmp(argv[2], "-root"))
+	if (vector_argv[2] == "-root")
 		index = 3;
 
-	else if (!strcmp(argv[4], "-root"))
+	else if (vector_argv[4] == "-root")
 		index = 5;
 
-	string str_root(argv[index]);
-	bfs::path root(str_root);
+	bfs::path root(vector_argv[index]);
 	return root.generic_string();
 }
 
@@ -215,18 +214,17 @@ bfs::path tmp::command::get_dest_path(const std::string command, tmp::command::p
 	return dest.generic_string();
 }
 
-bfs::path tmp::command::get_dest_path(const int argc,  char* argv[])
+bfs::path tmp::command::get_dest_path(std::vector<std::string> vector_argv)
 {
 	int index = 0;
 
-	if (!strcmp(argv[2], "-dest"))
+	if (vector_argv[2] == "-dest")
 		index = 3;
 
-	else if (!strcmp(argv[4], "-dest"))
+	else if (vector_argv[4] == "-dest")
 		index = 5;
 
-	string str_dest(argv[index]);
-	bfs::path dest(str_dest);
+	bfs::path dest(vector_argv[index]);
 	return dest.generic_string();
 }
 
@@ -269,9 +267,9 @@ bool tmp::command::is_right(const std::string command)
 	}
 }
 
-bool tmp::command::is_right(const int argc,  char* argv[], tmp::system::Error_Code& error_code)
+bool tmp::command::is_right(std::vector<std::string> vector_argv, tmp::system::Error_Code& error_code)
 {
-	switch (tmp::command::get_work(argv))
+	switch (tmp::command::get_work(vector_argv))
 	{
 	// work이 unknown일 때 오류 문장이다.
 	case  tmp::command::work::unknown:
@@ -281,9 +279,10 @@ bool tmp::command::is_right(const int argc,  char* argv[], tmp::system::Error_Co
 	// work이 print, delete, help (옵션이 없는 work)일 때 
 	case tmp::command::work::print:
 	case tmp::command::work::_delete:
+	case tmp::command::work::sync:
 	case tmp::command::work::help:
-		// 명령어의 길이가 3개 이상이면 오류 문장이다.
-		if (argc > 2)
+		// 명령어의 길이가 2가 아니면 오류 문장이다.
+		if (vector_argv.size() != 2)
 		{
 			error_code.set_error_code(tmp::system::error_list::number_of_element);
 			return false;
@@ -294,21 +293,21 @@ bool tmp::command::is_right(const int argc,  char* argv[], tmp::system::Error_Co
 	// work이 add일 때
 	case tmp::command::work::add:
 		// 명령어의 길이가 6개가 아니면 오류 문장이다.
-		if (argc != 6)
+		if (vector_argv.size() != 6)
 		{
 			error_code.set_error_code(tmp::system::error_list::number_of_element);
 			return false;
 		}
 
 		// 옵션 자리에 -root, -dest가 없으면 오류 문장이다.
-		if (!(strcmp(argv[2], "-root") || !strcmp(argv[4], "-root")) == false || (!strcmp(argv[2], "-dest") || !strcmp(argv[4], "-dest")) == false)
+		if (!((vector_argv[2] == "-root") || (vector_argv[4] == "-root") && ((vector_argv[2] == "-dest") || (vector_argv[4] == "-dest"))))
 		{
 			error_code.set_error_code(tmp::system::error_list::nonexistent_option);
 			return false;
 		}
 
 		// 경로가 존재하지 않으면 오류 문장이다.
-		if (!bfs::exists(tmp::command::get_root_path(argc, argv)) || !bfs::exists(tmp::command::get_dest_path(argc, argv)))
+		if (!bfs::exists(tmp::command::get_root_path(vector_argv)) || !bfs::exists(tmp::command::get_dest_path(vector_argv)))
 		{
 			error_code.set_error_code(tmp::system::error_list::nonexistent_path);
 			return false;

@@ -9,17 +9,19 @@
 
 int main(int argc, char* argv[])
 {
+	/*int test_size = 2;
 	char* test_argv[2];
-
-	test_argv[0] = "test";
-	test_argv[1] = "print";
-	/*test_argv[2] = "-root";
-	test_argv[3] = "c:/";
+	test_argv[0] = "sync";
+	test_argv[1] = "sync";
+	test_argv[2] = "-root";
+	test_argv[3] = "c:/Test/A";
 	test_argv[4] = "-dest";
-	test_argv[5] = "d:/";*/
+	test_argv[5] = "d:/Test/Backup";
+	std::vector<std::string> vector_argv(test_argv, test_argv + test_size);
+	tmp::command::command(vector_argv);*/
 
-	tmp::command::command(2, test_argv);
-	//tmp::command::command(argc, argv);
+	std::vector<std::string> vector_argv(argv, argv + argc);
+	tmp::command::command(vector_argv);
 	//std::cout << bfs::exists(tmp::command::get_root_path(argc, argv)) << std::endl;
 
 
@@ -30,6 +32,8 @@ int main(int argc, char* argv[])
 
 		tmp::command::command(argc, argv);
 	}*/
+
+	return 0;
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

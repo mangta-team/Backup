@@ -45,7 +45,7 @@ enum class path_option
  * @param cosnt int argc 토큰(' ')으로 나눠진 명령어의 개수
  * @param const char* 명령어를 토큰(' ')으로 나눠 단어별로 저장한 문자열 배열 
  */
- void command(const int argc,  char* argv[]);
+ void command(std::vector<std::string> vector_argv);
  
 /**
  * @brief 명령어(command)에서 열거형 action을 반환하는 메소드
@@ -64,7 +64,7 @@ enum class path_option
  * @brief main의 인자로 입력된 명령어에서 열거형 work 을 반환하는 메소드
  * @param const char* argv[] 명령어
  */
- tmp::command::work get_work( char* argv[]);
+ tmp::command::work get_work(std::vector<std::string> vector_argv);
  
 /**
  * @brief 명령어(connad)에서 root의 경로를 반환하는 메소드
@@ -78,7 +78,7 @@ enum class path_option
  * @param const int argc main 인자의 개수
  * @param const char* argv[] 
  */
- bfs::path get_root_path(const int argc,  char* argv[]);
+ bfs::path get_root_path(std::vector<std::string> vector_argv);
  
 /**
  * @brief
@@ -90,7 +90,7 @@ enum class path_option
  * @brief
  * @param string command 명령어
  */
- bfs::path get_dest_path(const int argc,  char* argv[]);
+ bfs::path get_dest_path(std::vector<std::string> vector_argv);
  
 /**
  * @brief 옳바른 명령어인지 확인하는 메소드
@@ -102,7 +102,7 @@ enum class path_option
  * @brief 옳바른 명령어인지 확인하는 메소드
  * @param string command 명령어
  */
- bool is_right(const int argc,  char* argv[], tmp::system::Error_Code& error_code);
+ bool is_right(std::vector<std::string> vector_argv, tmp::system::Error_Code& error_code);
 
 } // !namespace command
 } // !namespace sync
