@@ -9,29 +9,8 @@
 
 int main(int argc, char* argv[])
 {
-	/*int test_size = 2;
-	char* test_argv[2];
-	test_argv[0] = "sync";
-	test_argv[1] = "sync";
-	test_argv[2] = "-root";
-	test_argv[3] = "c:/Test/A";
-	test_argv[4] = "-dest";
-	test_argv[5] = "d:/Test/Backup";
-	std::vector<std::string> vector_argv(test_argv, test_argv + test_size);
-	tmp::command::command(vector_argv);*/
-
 	std::vector<std::string> vector_argv(argv, argv + argc);
 	tmp::command::command(vector_argv);
-	//std::cout << bfs::exists(tmp::command::get_root_path(argc, argv)) << std::endl;
-
-
-	/*if (argc != 1)
-	{
-		for(int index = 0; index < argc; index++)
-			std::cout << argv[index] << std::endl;
-
-		tmp::command::command(argc, argv);
-	}*/
 
 	return 0;
 }

@@ -14,7 +14,7 @@
 #include <boost/foreach.hpp>
 namespace bfs = boost::filesystem;
 
-namespace tmp // 임시 네임스페이스
+namespace backup
 {
 namespace sync
 {
@@ -30,6 +30,6 @@ namespace sync
 void sync(const bfs::path &root, const bfs::path &dest/*, boost::system::error_code*/);
 
 } // !namespace sycn
-} // !namespace tmp	
+} // !namespace backup	
 
 #endif // !SYNC_HPP

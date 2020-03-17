@@ -10,7 +10,7 @@
 #include "Error_Code.hpp"
 
 namespace bfs = boost::filesystem;
-namespace tmp // 임시 네임스페이스
+namespace backup
 {
 namespace command
 {
@@ -51,27 +51,27 @@ enum class path_option
  * @brief 명령어(command)에서 열거형 action을 반환하는 메소드
  * @param string command 명령어
  */
- tmp::command::work get_work(const std::string command);
+ backup::command::work get_work(const std::string command);
 
  /**
   * @brief 명령어(command)에서 열거형 work을 반환하고 string str_work에 문자열 work을 저장하는 메소드
   * @param string command 명령어
   * @param string str_work work의 work의 문자열을 저장할 string 포인터
   */
- tmp::command::work get_work(const std::string command, std::string* const str_work);
+ backup::command::work get_work(const std::string command, std::string* const str_work);
 
  /**
  * @brief main의 인자로 입력된 명령어에서 열거형 work 을 반환하는 메소드
  * @param const char* argv[] 명령어
  */
- tmp::command::work get_work(std::vector<std::string> vector_argv);
+ backup::command::work get_work(std::vector<std::string> vector_argv);
  
 /**
  * @brief 명령어(connad)에서 root의 경로를 반환하는 메소드
  * @param string command 명령어
- * @param tmp::command::path_option path_option 명령어/파일을
+ * @param backup::command::path_option path_option 명령어/파일을
  */
- bfs::path get_root_path(const std::string command, tmp::command::path_option path_option);
+ bfs::path get_root_path(const std::string command, backup::command::path_option path_option);
 
  /**
  * @brief main 인자로 입력된 명령어에서 root의 경로를 반환하는 메소드
@@ -84,7 +84,7 @@ enum class path_option
  * @brief
  * @param string command 명령어
  */
- bfs::path get_dest_path(const std::string command, tmp::command::path_option path_option);
+ bfs::path get_dest_path(const std::string command, backup::command::path_option path_option);
 
  /**
  * @brief
@@ -102,10 +102,10 @@ enum class path_option
  * @brief 옳바른 명령어인지 확인하는 메소드
  * @param string command 명령어
  */
- bool is_right(std::vector<std::string> vector_argv, tmp::system::Error_Code& error_code);
+ bool is_right(std::vector<std::string> vector_argv, backup::system::Error_Code& error_code);
 
 } // !namespace command
-} // !namespace sync
+} // !namespace backup
 
 #endif // !COMMAND_HPP
 

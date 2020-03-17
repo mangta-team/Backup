@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace tmp
+namespace backup
 {
 namespace system
 {
@@ -27,12 +27,12 @@ public:
 	Error_Code() { set_error_code(error_list::none); }
 
 	void set_error_code(error_list error_code) { this->error_code =error_code; }
-	tmp::system::error_list get_error_code() { return error_code; }
+	backup::system::error_list get_error_code() { return error_code; }
 
 	std::string what();
 };
 
 } // !namespace system
-} // !namespace tmp
+} // !namespace backup
 
 #endif // !ERROR_CODE_HPP

@@ -11,13 +11,13 @@
 
 namespace bfs = boost::filesystem;
 
-namespace tmp // 임시 네임스페이스
+namespace backup
 {
 namespace dir_center
 {
 #define PATH_TXT "dir_path/path.txt"
 
-/**
+	/**
 	 * @brief 외부 파일에 저장된 root-dest 경로를 추가하는 메소드
 	 */
 	void add(bfs::path root, bfs::path dest);
@@ -39,7 +39,7 @@ namespace dir_center
 	 * @return 외부 파일에 저장된 경로의 존재 유무 반환, 없으면 1, 있으면 0
 	 */
 	bool print(std::vector<std::string>*);
-}
-}
+} // !namespace dir_center
+} // !namespace backup
 
 #endif	//	!DIR_CENTER_HPP
