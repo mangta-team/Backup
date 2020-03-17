@@ -29,13 +29,13 @@ void backup::command::command(std::vector<std::string> vector_argv)
 		cout << "[알림] >> 다음 항목을 동기화 합니다." << endl << endl;
 
 		{
-			vector<string> paths;
-			if (backup::dir_center::print(&paths))
+			vector<string> str_paths;
+			if (backup::dir_center::print(&str_paths))
 				return;
 
-			for (int index = 0; index < paths.size(); index++)
-				backup::sync::sync(backup::command::get_root_path(paths[index], backup::command::path_option::file),
-					backup::command::get_dest_path(paths[index], backup::command::path_option::file));
+			for (int index = 0; index < str_paths.size(); index++)
+				backup::sync::sync(backup::dir_center::get_source_path(str_paths[index]),
+					backup::dir_center::get_dest_path(str_paths[index]));
 		}
 
 		cout << "[알림] >> 동기화가 끝났습니다." << endl << endl;

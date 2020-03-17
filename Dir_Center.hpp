@@ -18,9 +18,9 @@ namespace dir_center
 #define PATH_TXT "dir_path/path.txt"
 
 	/**
-	 * @brief 외부 파일에 저장된 root-dest 경로를 추가하는 메소드
+	 * @brief 외부 파일에 저장된 source-dest 경로를 추가하는 메소드
 	 */
-	void add(bfs::path root, bfs::path dest);
+	void add(bfs::path source, bfs::path dest);
 
 	/**
 	 * @brief 외부 파일에 저장된 root-dest 경로를 삭제하는 메소드
@@ -39,6 +39,22 @@ namespace dir_center
 	 * @return 외부 파일에 저장된 경로의 존재 유무 반환, 없으면 1, 있으면 0
 	 */
 	bool print(std::vector<std::string>*);
+
+	/**
+	 * @brief 외부 파일에서 가져온 source-dest 경로 문자열에서 
+			  source의 경로를 반환하는 메소드
+	 * @param std::string str_paths 외부 파일에서 가져온 source-dest 경로 문자열
+	 * @return bfs::path source 경로
+	 */
+	bfs::path get_source_path(std::string str_paths);
+
+	/**
+	 * @brief 외부 파일에서 가져온 source-dest 경로 문자열에서
+			  dest의 경로를 반환하는 메소드
+	 * @param std::string str_paths 외부 파일에서 가져온 source-dest 경로 문자열
+	 * @return bfs::path dest 경로
+	 */
+	bfs::path get_dest_path(std::string str_paths);
 } // !namespace dir_center
 } // !namespace backup
 

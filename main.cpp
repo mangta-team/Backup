@@ -10,7 +10,7 @@
 int main(int argc, char* argv[])
 {
 	std::vector<std::string> vector_argv(argv, argv + argc);
-	tmp::command::command(vector_argv);
+	backup::command::command(vector_argv);
 
 	return 0;
 }
