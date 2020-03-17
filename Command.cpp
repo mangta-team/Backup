@@ -14,7 +14,7 @@ void backup::command::command(std::vector<std::string> vector_argv)
 	switch (backup::command::get_work(vector_argv))
 	{
 	case backup::command::work::add:
-		backup::dir_center::add(backup::command::get_root_path(vector_argv), backup::command::get_dest_path(vector_argv));
+		backup::dir_center::add(backup::command::get_source_path(vector_argv), backup::command::get_dest_path(vector_argv));
 		break;
 
 	case backup::command::work::_delete:
@@ -72,7 +72,7 @@ backup::command::work backup::command::get_work(std::vector<std::string> vector_
 		return backup::command::work::unknown;
 }
 
-bfs::path backup::command::get_root_path(std::vector<std::string> vector_argv)
+bfs::path backup::command::get_source_path(std::vector<std::string> vector_argv)
 {
 	int index = 0;
 
@@ -147,7 +147,7 @@ bool backup::command::is_right(std::vector<std::string> vector_argv, backup::sys
 		}
 
 		// 경로가 존재하지 않으면 오류 문장이다.
-		if (!bfs::exists(backup::command::get_root_path(vector_argv)) || !bfs::exists(backup::command::get_dest_path(vector_argv)))
+		if (!bfs::exists(backup::command::get_source_path(vector_argv)) || !bfs::exists(backup::command::get_dest_path(vector_argv)))
 		{
 			error_code.set_error_code(backup::system::error_list::nonexistent_path);
 			return false;

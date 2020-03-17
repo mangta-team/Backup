@@ -23,49 +23,43 @@ enum class work
 	_delete,
 	print,
 	sync,
-	help,
-    exit // cmd에서 실행하는 것이 아닐 때 사용
-};
-
-enum class path_option
-{
-    none = 0,
-    file = none,
-    command,
+	help
 };
 
  /**
- * @brief
- * @param cosnt int argc 토큰(' ')으로 나눠진 명령어의 개수
- * @param const char* 명령어를 토큰(' ')으로 나눠 단어별로 저장한 문자열 배열 
- */
+  * @brief 명령어 메소드
+  * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter
+  */
  void command(std::vector<std::string> vector_argv);
 
  /**
- * @brief main의 인자로 입력된 명령어에서 열거형 work 을 반환하는 메소드
- * @param const char* argv[] 명령어
- */
+  * @brief main의 매개변수 argv에서 작업(work)을 반환하는 메소드
+  * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter
+  * @return backup::command::work 명령어의 work에 해당하는 열거형 값
+  */
  backup::command::work get_work(std::vector<std::string> vector_argv);
  
 
  /**
- * @brief main 인자로 입력된 명령어에서 root의 경로를 반환하는 메소드
- * @param const int argc main 인자의 개수
- * @param const char* argv[] 
- */
- bfs::path get_root_path(std::vector<std::string> vector_argv);
- 
+  * @brief main 인자로 입력된 명령어에서 source의 경로를 반환하는 메소드
+  * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter
+  * @return boost::filesystem::path 명령어의 source의 경로
+  */
+ bfs::path get_source_path(std::vector<std::string> vector_argv);
 
  /**
- * @brief
- * @param string command 명령어
- */
+  * @brief main 인자로 입력된 명령어에서 dest의 경로를 반환하는 메소드
+  * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter
+  * @return boost::filesystem::path 명령어의 dest의 경로
+  */
  bfs::path get_dest_path(std::vector<std::string> vector_argv);
 
  /**
- * @brief 옳바른 명령어인지 확인하는 메소드
- * @param string command 명령어
- */
+  * @brief 옳바른 명령어인지 확인하는 메소드
+  * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter
+  * @param backup::system::Error_Code& error_code 
+  * @return bool 옳음의 유무, 옳바른 명령어 true, 오류 명령어 false
+  */
  bool is_right(std::vector<std::string> vector_argv, backup::system::Error_Code& error_code);
 
 } // !namespace command
