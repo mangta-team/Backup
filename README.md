@@ -2,7 +2,7 @@
 This program can be executed in cmd after setting system variables.
 
 Command
-work -option "path" …
+work -option "path" ...
 
 work list
 - add: save string "source_path-dest_path" at dir_path/path.txt
