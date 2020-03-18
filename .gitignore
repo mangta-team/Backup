@@ -1,6 +1,9 @@
 Sync.vcxproj
 Sync.vcxproj.filters
 Sync.vcxproj.user
+
 Debug
-test_dir
-sync.txt
+Release
+
+dir_path
+backup
