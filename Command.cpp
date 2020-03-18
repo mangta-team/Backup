@@ -103,6 +103,7 @@ bfs::path backup::command::get_dest_path(std::vector<std::string> vector_argv)
 
 bool backup::command::is_right(std::vector<std::string> vector_argv, backup::system::Error_Code& error_code)
 {
+	// main의 argv의 개수가 1개 이면 오류 문장이다.
 	if (vector_argv.size() == 1)
 	{
 		error_code.set_error_code(backup::system::error_list::number_of_element);
@@ -111,7 +112,8 @@ bool backup::command::is_right(std::vector<std::string> vector_argv, backup::sys
 
 	switch (backup::command::get_work(vector_argv))
 	{
-	// work이 unknown일 때 오류 문장이다.
+
+	// work == unknown일 때 오류 문장이다.
 	case  backup::command::work::unknown:
 		error_code.set_error_code(backup::system::error_list::nonexistent_work);
 		return false;
@@ -121,6 +123,7 @@ bool backup::command::is_right(std::vector<std::string> vector_argv, backup::sys
 	case backup::command::work::_delete:
 	case backup::command::work::sync:
 	case backup::command::work::help:
+
 		// 명령어의 길이가 2가 아니면 오류 문장이다.
 		if (vector_argv.size() != 2)
 		{
@@ -132,6 +135,7 @@ bool backup::command::is_right(std::vector<std::string> vector_argv, backup::sys
 
 	// work이 add일 때
 	case backup::command::work::add:
+
 		// 명령어의 길이가 6개가 아니면 오류 문장이다.
 		if (vector_argv.size() != 6)
 		{
