@@ -1,20 +1,22 @@
-Sync
 
-¸í·É¾î Çü½Ä
-action root-path dest-path
-* action: ¼öÇàÇÒ µ¿ÀÛ
-* path: ·ÎÄÃÀÇ °æ·Î
+This program can be executed in cmd after setting system variables.
 
-action
-* add: path Ãß°¡
-* delete: path »èÁ¦
-* print: optionÀÇ path Ãâ·Â
-* sync: µ¿±âÈ­
-* help: µµ¿ò¸»
+Command
+work -option "path" â€¦
 
-¸í·É¾î ¿¹)
-add c:/test d:/backup
-delete
-print
-sync
-help
+work list
+- add: save string "source_path-dest_path" at dir_path/path.txt
+	- have two option(root, dest)
+	- ex) add -root "c:/A" -dest "d:/Backup"
+- delete: delete only one string "source_path-dest_path"
+	- have not option
+- print: display all strings "source_path-dest_path" in dir_path/path.txt
+	- have not option
+- sync: file synchronization
+	- have not option
+- help: display help
+	- have not option
+
+option list
+- root
+- dest
