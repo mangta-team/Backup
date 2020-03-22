@@ -15,7 +15,8 @@ namespace backup
 {
 namespace dir_center
 {
-#define PATH_TXT "dir_path/path.txt"
+#define PATH_TXT bfs::path("dir_path/path.txt")
+#define TEST_PATH_TXT "path.txt"
 
 /**
  * @brief 외부 파일에 저장된 source-dest 경로를 추가하는 메소드
