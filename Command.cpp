@@ -2,6 +2,47 @@
 
 using namespace std;	
 
+// add -root "c:/" -dest "d:/"
+// 01234567890123456789
+// 토큰 문자열 자르기
+// 다음 문자열 삭제
+// 토큰 문자열 벡터에 넣기
+std::vector<std::string> backup::command::get_command()
+{
+	string str_command;
+	getline(cin, str_command);
+	//cout << str_command << endl;
+
+	vector<string> vector_argv;
+	for (; ;)
+	{
+		int token_index;
+		string token_command;
+
+		// 토큰 문자열 자르기
+		token_command = str_command.substr(0, str_command.find(" "));
+		if (str_command[0] == '\"')
+			token_command = str_command.substr(1, str_command.find('\"', 1) - 1);
+
+		// push_back
+		vector_argv.push_back(token_command);
+
+		// 토큰 인덱스 계산
+		token_index = str_command.find(" ") + 1;
+		if (str_command[0] == '\"')
+			token_index = str_command.find('\"', str_command.find('\"', 1) + 1);
+		
+		// 마지막 명령인지 확인
+		if (token_index < 0)
+			break;
+
+		// 토큰 문자열 삭제
+		str_command = str_command.substr(token_index);
+	}
+
+	return vector_argv;
+}
+
 void backup::command::command(std::vector<std::string> vector_argv)
 {
 	backup::system::Error_Code error_code;

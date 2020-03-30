@@ -26,6 +26,12 @@ enum class work
 	help
 };
 
+/**
+ * @brief 명령어를 입력받는 메소드
+ * @return 입력 받은 명령어를 ' '으로 나눠 저장한 std::vector<std::string>
+ */
+std::vector<std::string> get_command();
+
  /**
   * @brief 명령어 메소드
   * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter

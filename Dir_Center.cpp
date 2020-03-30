@@ -44,7 +44,7 @@ void backup::dir_center::_delete()
 bool backup::dir_center::print()
 {
 
-	if (/*bfs::file_size(PATH_TXT) == 0 */ /*test code*/bfs::file_size(TEST_PATH_TXT) == 0)
+	if (bfs::file_size(PATH_TXT) == 0)
 	{
 		cout << "[알림] 경로가 없습니다." << endl;
 		return 1;
