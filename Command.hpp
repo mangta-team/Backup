@@ -15,6 +15,8 @@ namespace backup
 namespace command
 {
 #define COMMAND_TOKEN ' '
+#define ADD_OPTION_INDEX_1 1
+#define ADD_OPTION_INDEX_2 3
 
 enum class work
 {
@@ -23,7 +25,8 @@ enum class work
 	_delete,
 	print,
 	sync,
-	help
+	help,
+    exit
 };
 
 /**
@@ -35,8 +38,9 @@ std::vector<std::string> get_command();
  /**
   * @brief 명령어 메소드
   * @param std::vector<std::string> vector_argv main의 매개변수 argv를 저장한 vecter
+  * @return bool 종료 신호(계속 실행: 1, 종료: 0)
   */
- void command(std::vector<std::string> vector_argv);
+ bool command(std::vector<std::string> vector_argv);
 
  /**
   * @brief main의 매개변수 argv에서 작업(work)을 반환하는 메소드

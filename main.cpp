@@ -9,24 +9,10 @@
 
 int main(int argc, char* argv[])
 {
-	std::vector<std::string> vector_argv=backup::command::get_command();
-	for (int index=0;index <vector_argv.size();index++)
-		std::cout << "[" << index << "]" << vector_argv[index] << std::endl;
-	
+	while (backup::command::command(backup::command::get_command()))
+	{
 
-	//try
-	//{
-	//	std::vector<std::string> vector_argv(argv, argv + argc);
-	//	/*std::cout << argc << std::endl;
-	//	for (std::string str : vector_argv)
-	//		std::cout << str << std::endl;*/
-	//	backup::command::command(vector_argv);
-	//}
-
-	//catch (const std::exception& e)
-	//{
-	//	std::cout << e.what() << std::endl;
-	//}
+	}
 
 	return 0;
 }

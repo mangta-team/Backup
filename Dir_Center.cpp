@@ -21,16 +21,18 @@ void backup::dir_center::_delete()
 	while (1)
 	{
 		int index = 0;
-		cout << "[삭제할 인덱스] >> ";
+		cout << "[삭제할 인덱스] << ";
 		cin >> index;
 
-		if (index >= 0 && index <= str_paths.size())
+		if (index >= 0 && index <= str_paths.size() - 1)
 		{
+			cout << "[알림] >> " << index << "번 경로가 삭제가 완료되었습니다." << endl << endl;
 			str_paths.erase(str_paths.begin() + index);
+			cin.ignore();
 			break;
 		}
 
-		cout << "[알림] 잘못된 값이 입력됐습니다. 다시 입력해주세요." << endl << endl;
+		cout << "[알림] >> 잘못된 값이 입력됐습니다. 다시 입력해주세요." << endl << endl;
 	}
 
 	bfs::ofstream write(PATH_TXT);
@@ -46,11 +48,11 @@ bool backup::dir_center::print()
 
 	if (bfs::file_size(PATH_TXT) == 0)
 	{
-		cout << "[알림] 경로가 없습니다." << endl;
+		cout << "[알림] >> 경로가 없습니다." << endl << endl;
 		return 1;
 	}
 
-	bfs::ifstream read(TEST_PATH_TXT); // test code
+	bfs::ifstream read(PATH_TXT); // test code
 	//bfs::ifstream read(PATH_TXT);
 	for (int index = 0; !read.eof(); index++)
 	{
@@ -60,6 +62,15 @@ bool backup::dir_center::print()
 		if (paths != "")
 			cout << "[" << index << "] " << paths << endl;
 	}
+	/*while (read)
+	{
+		string str_paths;
+		getline(read, str_paths);
+
+		if (str_paths != "")
+			cout << "[" << 1 << "] " << str_paths << endl;
+	}*/
+	cout << endl;
 	read.close();
 
 	return 0;
@@ -69,12 +80,11 @@ bool backup::dir_center::print(std::vector<std::string>* paths)
 {
 	if (bfs::file_size(PATH_TXT) == 0)
 	{
-		cout << "[알림] 경로가 없습니다." << endl;
+		cout << "[알림] >> 경로가 없습니다." << endl << endl;
 		return 1;
 	}
 
-	bfs::ifstream read(TEST_PATH_TXT); // test code
-	//bfs::ifstream read(PATH_TXT);
+	bfs::ifstream read(PATH_TXT);
 	for (int index = 0; !read.eof(); index++)
 	{
 		string str_paths;
@@ -86,6 +96,17 @@ bool backup::dir_center::print(std::vector<std::string>* paths)
 			cout << "[" << index << "] " << str_paths << endl;
 		}
 	}
+	/*while (read)
+	{
+		string str_paths;
+		getline(read, str_paths);
+		
+		if (str_paths != "")
+		{
+			paths->push_back(str_paths);
+			cout << "[" << 1 << "] " << str_paths << endl;
+		}
+	}*/
 	read.close();
 
 	return 0;
