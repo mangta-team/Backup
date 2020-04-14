@@ -5,5 +5,5 @@ Sync.vcxproj.user
 Debug
 Release
 
-dir_path
-backup
+dir_path/ # test dirctory
+backup/ # backup.7z's original directory
