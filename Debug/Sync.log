@@ -1,4 +1,0 @@
-﻿  Dir_Center.cpp
-D:\Code\Backup\sync\Sync\Sync\Dir_Center.cpp(27,27): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-D:\Code\Backup\sync\Sync\Sync\Dir_Center.cpp(39,28): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  Sync.vcxproj -> D:\Code\Backup\sync\Sync\Debug\Sync.exe
