@@ -1,10 +1,10 @@
+# Visual Studio file/directory
 Sync.vcxproj
 Sync.vcxproj.filters
 Sync.vcxproj.user
+Debug/		
+Release/	
 
-Debug/		# after compile, create directory
-Release/	# after compile, create directory
-
-dir_path/**			# test dirctory
-backup/**				# backup.7z's original directory
-backup/dir_path/	# backup.7z's original directory
+# project directory
+dir_path/			
+backup/				
