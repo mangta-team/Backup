@@ -26,7 +26,7 @@ namespace dir_center
 void add(bfs::path source, bfs::path dest);
 
 /**
- * @brief 외부 파일에 저장된 root-dest 경로를 삭제하는 메소드
+ * @brief 외부 파일에 저장된 source-dest 경로를 삭제하는 메소드
  */
 void _delete();
 

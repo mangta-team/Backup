@@ -2,22 +2,22 @@
 
 using namespace std;
 
-// 1. "dest/root.relative_path()" 이 없으면 copy
-// 2. root의 하위 디렉토리, 파일을 각각 조사
-// 3. 하위 폴더가 있으면 sync(하위폴더, dest/root.filename()) 호출 (하위 폴더 반복)
+// 1. "dest/source.relative_path()"이 없으면 copy
+// 2. source의 하위 디렉토리, 파일을 각각 조사
+// 3. 하위 폴더가 있으면 sync(하위폴더, dest/source.filename()) 호출 (하위 폴더 반복)
 // 4. 하위 폴더가 더이상 없으면 파일들 복사
-void backup::sync::sync(const bfs::path& root, const bfs::path& dest)
+void backup::sync::sync(const bfs::path& source, const bfs::path& dest)
 {
-	// 1. dest/root.filename()이 존재하지 않으면 생성
-	bfs::path tmp_root = root.generic_path();
+	// 1. dest/source.filename()이 존재하지 않으면 생성
+	bfs::path tmp_source = source.generic_path();
 	bfs::path tmp_dest = dest.generic_path();
-	if (!bfs::exists(tmp_dest /= root.filename()))
+	if (!bfs::exists(tmp_dest /= source.filename()))
 		bfs::create_directory(tmp_dest.generic_path());
 
-	// 2. root 하위 디렉토리, 파일 조사
+	// 2. source 하위 디렉토리, 파일 조사
 	vector<bfs::path> directories;
 	vector<bfs::path> files;
-	BOOST_FOREACH(const bfs::path & path, make_pair(bfs::directory_iterator(root), bfs::directory_iterator()))
+	BOOST_FOREACH(const bfs::path & path, make_pair(bfs::directory_iterator(source), bfs::directory_iterator()))
 	{
 		if (bfs::is_directory(path.generic_path()))
 			directories.push_back(path.generic_path());
@@ -31,7 +31,7 @@ void backup::sync::sync(const bfs::path& root, const bfs::path& dest)
 	{
 		for (int index = 0; index < directories.size(); index++)
 		{
-			tmp_dest = dest; tmp_dest /= root.filename();
+			tmp_dest = dest; tmp_dest /= source.filename();
 			sync(directories[index], tmp_dest);
 		}
 
@@ -43,7 +43,7 @@ void backup::sync::sync(const bfs::path& root, const bfs::path& dest)
 		for (int index = 0; index < files.size(); index++)
 		{
 			tmp_dest = dest;
-			tmp_dest /= root.filename() /= files[index].filename();
+			tmp_dest /= source.filename() /= files[index].filename();
 			bfs::copy_file(files[index], tmp_dest, bfs::copy_option::overwrite_if_exists);
 		}
 	}
